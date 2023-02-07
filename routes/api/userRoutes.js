@@ -1,26 +1,39 @@
-API Routes
-/api/users
+// **`/api/users`**
 
-GET all users
+// * `GET` all users
 
-GET a single user by its _id and populated thought and friend data
+// get all users
 
-POST a new user:
+// * `GET` a single user by its `_id` and populated thought and friend data
 
-// example data
-{
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
-}
-PUT to update a user by its _id
+// * `POST` a new user:
 
-DELETE to remove user by its _id
+// ```json
+// // example data
+// {
+//   "username": "lernantino",
+//   "email": "lernantino@gmail.com"
+// }
+// ```
 
-BONUS: Remove a user's associated thoughts when deleted.
+// * `PUT` to update a user by its `_id`
 
-/api/users/:userId/friends/:friendId
+// * `DELETE` to remove user by its `_id`
 
-POST to add a new friend to a user's friend list
+// **BONUS**: Remove a user's associated thoughts when deleted.
 
-DELETE to remove a friend from a user's friend list
+// **`/api/users/:userId/friends/:friendId`**
 
+// * `POST` to add a new friend to a user's friend list
+
+// * `DELETE` to remove a friend from a user's friend list
+
+const router = require("express").Router();
+const { getUsers, createUser, getSingleUser, deleteUser, updateUser } = require("../../controllers/userController");
+
+router.route('/').get(getUsers).post(createUser);
+router.route('/:userId').get(getSingleUser);
+router.route('/:userId').delete(deleteUser);
+router.route('/:userId').put(updateUser);
+
+module.exports = router;

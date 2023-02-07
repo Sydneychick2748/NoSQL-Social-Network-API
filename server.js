@@ -1,31 +1,20 @@
-// dependencies
 const express = require('express');
-const mongoose = require('mongoose');
-
-// routing
+const db = require('./config/connection');
 const routes = require('./routes');
 
-// express & port
-const app = express();
+
+
 const PORT = process.env.PORT || 3001;
+const app = express();
 
-// middleware
-app.use(express.json());
+
+
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.json());
+app.use(routes);
 
-// hook db to mongoose
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/27017',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`running on port ${PORT}!`);
+  });
 });
-
-// Use this to log mongo queries being executed
-mongoose.set('debug', true);
-
-app.use(require('./routes'));
-
-// port listening
-app.listen(PORT, () => console.log(`Status: 🤘 @ localhost:${PORT}`));
