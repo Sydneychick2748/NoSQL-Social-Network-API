@@ -2,6 +2,7 @@
 
 // * `GET` to get all thoughts
 
+
 // * `GET` to get a single thought by its `_id`
 
 // * `POST` to create a new thought (don't forget to push the created thought's `_id` to the associated user's `thoughts` array field)
@@ -27,6 +28,12 @@
 
 // * `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
 const router = require('express').Router();
+const { getAllThoughts, createThought, getSingleThought, updateThought, deleteThought, addReaction, removeReaction } = require('../../controllers/thoughtController');
+ router.route('/').get( getAllThoughts).post(createThought);
+ router.route('/:id').get(getSingleThought)
+// router.route('/:thoughtId/reactions').post(addReaction);
+// router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
+    
 
 
 module.exports = router;
