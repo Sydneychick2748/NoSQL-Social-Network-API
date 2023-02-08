@@ -1,7 +1,5 @@
 const { User } = require("../models");
 const { Thought } = require("../models");
-// const { ReactionSchema } = require("../models");
-// const { db } = require("../models/User");
 
 module.exports = {
   // Get all users
@@ -10,8 +8,6 @@ module.exports = {
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
-
-  
 
   // Get a single user
   getSingleUser(req, res) {
@@ -26,6 +22,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
   //create a user
   createUser(req, res) {
     User.create(req.body)
@@ -36,7 +33,7 @@ module.exports = {
       });
   },
 
-  //   // Update a user
+  // Update a user
   updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -51,7 +48,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  //   // Delete a user
+  // Delete a user
   deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
@@ -63,8 +60,8 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-   // add friend
-   addFriend(req, res) {
+  // add friend
+  addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $addToSet: { friends: req.params.friendId } },
@@ -85,11 +82,10 @@ module.exports = {
       { $pull: { friends: req.params.friendId } },
       { new: true }
     )
-      .then(
-        (user) =>
-          !user
-            ? res.status(404).json({ message: "No User find with this ID!" })
-            : res.json(user)
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: "No User find with this ID!" })
+          : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
