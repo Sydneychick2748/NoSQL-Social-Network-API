@@ -34,7 +34,7 @@ This is not Licensed
 
 
 ## How to Contribute
-If you would like to contribute, feel free to fork this code and try it yourself at the repo: 
+If you would like to contribute, feel free to fork this code and try it yourself at the repo: https://github.com/Sydneychick2748/NoSQL-Social-Network-API
 
 ## Questions
 You may direct any questions about the project to email: anabennett77@gamil.com
